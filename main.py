@@ -5,7 +5,7 @@ from FastTelethonhelper import Timer, fast_upload, fast_download, Timer
 import subprocess
 import asyncio
 
-
+loop = asyncio.get_event_loop()
 @bot.on(events.NewMessage(pattern="/are_you_alive"))
 async def _(event):
     await event.reply("I am alive master 😀")
@@ -27,6 +27,8 @@ async def _(event):
         await asyncio.sleep(1)
         res_file = await fast_upload(bot, f"[AG] {file}", r)
         await event.reply(file=res_file, force_document=True)
-    
+bot.start()
+
+bot.run_until_disconnected()
 
     
