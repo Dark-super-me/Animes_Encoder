@@ -26,7 +26,7 @@ async def _(event):
         fcmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
     await asyncio.sleep(1)
-    res_file = await fast_upload(bot, f"[AG] "{file}", r)
+    res_file = await fast_upload(bot, f"[AG] {file}", r)
     await event.reply(file=res_file, force_document=True)
   
         
