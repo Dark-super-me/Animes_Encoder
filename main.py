@@ -34,3 +34,4 @@ bot.start()
 bot.run_until_disconnected()
 
     
+# ran the app 
