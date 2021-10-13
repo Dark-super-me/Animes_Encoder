@@ -18,6 +18,7 @@ async def _(event):
 @bot.on(events.NewMessage(pattern="/request_new_job"))
 async def _(event):
     msg = await event.get_reply_message()
+    
         r = await event.reply("Downloading..")
         file = await fast_download(bot, msg, r, "")
         gg = await event.client.get_entity(user.id)
