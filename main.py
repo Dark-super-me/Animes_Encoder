@@ -18,16 +18,17 @@ async def _(event):
 @bot.on(events.NewMessage(pattern="/request_new_job"))
 async def _(event):
     msg = await event.get_reply_message()
-    
-        r = await event.reply("Downloading..")
-        file = await fast_download(bot, msg, r, "")
-        gg = await event.client.get_entity(user.id)
-        name = f"[{get_display_name(gg)}](tg://user?id={user.id})"
-        await r.edit(f"Encoding The Video File for the user : {user}, check stats via /stats ...")
-        subprocess.call(f'./ffmpegFDK -i "{file}" -map 0 -c:v libx265 -vf scale=854:480 -crf 32  -c:a libfdk_aac  -profile:a aac_he_v2 -vbr 2 "[AG] {file}"', shell=True)
-        await asyncio.sleep(1)
-        res_file = await fast_upload(bot, f"[AG] {file}", r)
-        await event.reply(file=res_file, force_document=True)
+    r = await event.reply("Downloading..")
+    file = await fast_download(bot, msg, r, "")
+    gg = await event.client.get_entity(user.id)
+    name = f"[{get_display_name(gg)}](tg://user?id={user.id})"
+    await r.edit(f"Encoding The Video File for the user : {user}, check stats via /stats ...")
+    subprocess.call(f'./ffmpegFDK -i "{file}" -map 0 -c:v libx265 -vf scale=854:480 -crf 32  -c:a libfdk_aac  -profile:a aac_he_v2 -vbr 2 "[AG] {file}"', shell=True)
+    await asyncio.sleep(1)
+    res_file = await fast_upload(bot, f"[AG] {file}", r)
+    await event.reply(file=res_file, force_document=True)
+  
+        
 bot.start()
 
 bot.run_until_disconnected()
