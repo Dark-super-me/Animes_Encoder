@@ -21,12 +21,12 @@ async def _(event):
     r = await event.reply("Downloading..")
     file = await fast_download(bot, msg, r, "")
     await r.edit("Encoding The Video File ...")
-    fcmd = f'ffmpeg -i "{file}" -preset veryfast -c:v libx265 -crf 32 -s 854x480 -map 0:v -c:a libopus -ab 32k -map 0:a -c:s copy -map 0:s? "{file}" -y'
+    fcmd = f'ffmpeg -i "{file}" -preset veryfast -c:v libx265 -crf 32 -s 854x480 -map 0:v -c:a libopus -ab 32k -map 0:a -c:s copy -map 0:s? "[AG] "{file}" -y'
     process = await asyncio.create_subprocess_shell(
         fcmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
     await asyncio.sleep(1)
-    res_file = await fast_upload(bot, f"[AG] {file}", r)
+    res_file = await fast_upload(bot, f"[AG] "file}", r)
     await event.reply(file=res_file, force_document=True)
   
         
